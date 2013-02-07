@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="../gfx/tiles.png" width="192" height="32"/>
+ </tileset>
+ <layer name="Wall" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYmBgYKIyphYYNY88M6hpHrrZw808fOoJmYdNnhbm4dKDSw5ffhwI80gpLwipBQBkLwCp
+  </data>
+ </layer>
+ <layer name="Down" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBh8gBWKR8EoGAWjABkAAC20AAs=
+  </data>
+ </layer>
+ <layer name="Up" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2DoAJaBdsAooDpgQcKEAAAOkAAR
+  </data>
+ </layer>
+ <layer name="Door" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFAwnYBtoBo2AUDCEAABfQAAc=
+  </data>
+ </layer>
+ <layer name="Solid" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYKQyphRQ2zx0c4ezeYxo7MHmPkrNw6ee3uZhk6eFebj04JLDl38GwjxqYgC/FABb
+  </data>
+ </layer>
+</map>
