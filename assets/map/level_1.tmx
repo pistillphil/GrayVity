@@ -2,20 +2,33 @@
 <map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
   <image source="../gfx/tiles.png" width="192" height="32"/>
+  <terraintypes>
+   <terrain name="Neues Terrain erzeugen" tile="-1"/>
+  </terraintypes>
+  <tile id="1">
+   <properties>
+    <property name="Gravity" value="None"/>
+   </properties>
+  </tile>
+  <tile id="2" terrain="0,,,0">
+   <properties>
+    <property name="Gravity" value="None"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="Gravity" value="up"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="Gravity" value="down"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Wall" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYKIQM2DhUwOMmkeeGdQ0D93s4WYePvWEzMMmTwvzcOnBJYctfw6kecSUH8TqAQBbVwCn
-  </data>
- </layer>
- <layer name="Down" width="20" height="15">
-  <data encoding="base64" compression="zlib">
-   eJxjYKAcsFLBjFEwCkbBKCAEABrMAAY=
-  </data>
- </layer>
- <layer name="Up" width="20" height="15">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2DoAJaBdsAooDpgQcKEAAAOkAAR
+   eJxjYmBgYKIQs6LxqQVGzSPPDGqah272QJvHQmXz8KknZB42eVqYh0sPLjn0/DnQ5lETAwB6YwC2
   </data>
  </layer>
  <layer name="Door" width="20" height="15">

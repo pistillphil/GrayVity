@@ -5,6 +5,7 @@ import com.haxepunk.World;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
 import player.Player;
+import wall.Wall;
 
 /**
  * ...
@@ -15,11 +16,9 @@ class GameWorld extends World
 {
 	
 	private var map:TmxEntity;
-	private var up:TmxEntity;
-	private var down:TmxEntity;
 	private var door:TmxEntity;
+	private var gravityReversers:Array<Wall>;
 	private var player:Player;
-	
 	private var lvlNumber:Int;
 	
 	public function new() 
@@ -27,9 +26,10 @@ class GameWorld extends World
 		
 		super();
 		
-		player = new Player();
+		this.player = new Player();
+		this.gravityReversers = new Array<Wall>();
 		
-		loadLevel();
+		this.loadLevel();
 		
 	}
 	
@@ -40,46 +40,28 @@ class GameWorld extends World
 		
 		map = new TmxEntity(lvlName);
 		
-		map.loadGraphic("gfx/tiles.png", ["Wall","Up","Down","Door"]);
+		map.loadGraphic("gfx/tiles.png", ["Wall","Door"]);
 		map.loadMask("Solid", "solid");
 		
 		add(map);
 		
-		up = new TmxEntity(lvlName);
-		down = new TmxEntity(lvlName);
 		door = new TmxEntity(lvlName);
-		
-		up.loadMask("Up", "up");
-		down.loadMask("Down", "down");
 		door.loadMask("Door", "door");
-		
-		add(up);
-		add(down);
 		add(door);
 		
-		/*player.x = 32*2;
-		player.y = Main.kScreenHeight - 32 * 4;*/
-		
-		var group = map.map.getObjectGroup("Objects");
-		for (i in group.objects)
-		{
-			if (i.type == "Start")
-			{
-				if (i.name == "PlayerStart")
-				{
-					player.x = i.x;
-					player.y = i.y;
-				}
-			}
-		}
-		
+		placePlayer();
 		add(player);
+		
+		placeGravityReversers("Wall");
+		
+
 		
 	}
 	
 	public function loadNextLevel():Void 
 	{
 		removeAll();
+		gravityReversers = new Array<Wall>();
 		
 		loadLevel(++lvlNumber);
 		
@@ -102,6 +84,53 @@ class GameWorld extends World
 			}
 		}
 		
+	}
+	
+	private function placePlayer():Void 
+	{
+		if (map.map.objectGroups.exists("Objects"))
+		{
+			var group = map.map.getObjectGroup("Objects");
+			for (i in group.objects)
+			{
+				if (i.type == "Start")
+				{
+					if (i.name == "PlayerStart")
+					{
+						player.x = i.x;
+						player.y = i.y;
+					}
+				}
+			}
+		}
+		else 
+		{
+			player.x = 32 * 2;
+			player.y = Main.kScreenHeight - 32 * 2;
+		}
+	}
+	
+	private function placeGravityReversers(layerName:String):Void 
+	{
+		
+		if (!map.map.layers.exists(layerName))
+			return;
+
+		var layer = map.map.getLayer(layerName);
+		for (i in 0...layer.height)
+		{
+			for (j in 0...layer.width)
+			{
+				var gid = layer.tileGIDs[i][j];
+				var tileset = map.map.getGidOwner(gid);
+				if (tileset != null && (tileset.getPropertiesByGid(gid).resolve("Gravity")=="up" || tileset.getPropertiesByGid(gid).resolve("Gravity") == "down"))
+				{
+					var temp:Wall = new Wall(j * Main.kTileSize, i * Main.kTileSize, tileset.getPropertiesByGid(gid).resolve("Gravity"));
+					gravityReversers.push(temp);
+					add(temp);
+				}
+			}
+		}
 	}
 	
 }
