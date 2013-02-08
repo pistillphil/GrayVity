@@ -28,4 +28,7 @@
    eJxjZGBgYKQyphYYNY88M6hpHrrZA20ePvX0Ng+bPC3Mw6UHlxy+/DgQ5lETAwC24ABZ
   </data>
  </layer>
+ <objectgroup name="Objects" width="20" height="15">
+  <object name="PlayerStart" type="Start" x="64" y="416"/>
+ </objectgroup>
 </map>

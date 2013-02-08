@@ -57,8 +57,22 @@ class GameWorld extends World
 		add(down);
 		add(door);
 		
-		player.x = 32*2;
-		player.y = Main.kScreenHeight - 32 * 4;
+		/*player.x = 32*2;
+		player.y = Main.kScreenHeight - 32 * 4;*/
+		
+		var group = map.map.getObjectGroup("Objects");
+		for (i in group.objects)
+		{
+			if (i.type == "Start")
+			{
+				if (i.name == "PlayerStart")
+				{
+					player.x = i.x;
+					player.y = i.y;
+				}
+			}
+		}
+		
 		add(player);
 		
 	}

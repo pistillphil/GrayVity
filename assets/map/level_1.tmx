@@ -5,12 +5,12 @@
  </tileset>
  <layer name="Wall" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYKIyphYYNY88M6hpHrrZw808fOoJmYdNnhbm4dKDSw5ffhwI80gpLwipBQBkLwCp
+   eJxjYmBgYKIQM2DhUwOMmkeeGdQ0D93s4WYePvWEzMMmTwvzcOnBJYctfw6kecSUH8TqAQBbVwCn
   </data>
  </layer>
  <layer name="Down" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBh8gBWKR8EoGAWjABkAAC20AAs=
+   eJxjYKAcsFLBjFEwCkbBKCAEABrMAAY=
   </data>
  </layer>
  <layer name="Up" width="20" height="15">
@@ -23,9 +23,12 @@
    eJxjYBgFAwnYBtoBo2AUDCEAABfQAAc=
   </data>
  </layer>
- <layer name="Solid" width="20" height="15">
+ <layer name="Solid" width="20" height="15" visible="0">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYKQyphRQ2zx0c4ezeYxo7MHmPkrNw6ee3uZhk6eFebj04JLDl38GwjxqYgC/FABb
+   eJxjZGBgYKQyphYYNY88M6hpHrrZA20ePvX0Ng+bPC3Mw6UHlxy+/DgQ5lETAwC24ABZ
   </data>
  </layer>
+ <objectgroup name="Objects" width="20" height="15">
+  <object name="PlayerStart" type="Start" x="64" y="416"/>
+ </objectgroup>
 </map>
