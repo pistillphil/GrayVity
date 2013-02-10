@@ -4,8 +4,11 @@ import com.haxepunk.tmx.TmxEntity;
 import com.haxepunk.World;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
+import obstacle.Obstacle;
+import obstacle.Spikes;
 import player.Player;
 import wall.Wall;
+import enums.Gravity;
 
 /**
  * ...
@@ -18,6 +21,7 @@ class GameWorld extends World
 	private var map:TmxEntity;
 	private var door:TmxEntity;
 	private var gravityReversers:Array<Wall>;
+	private var obstacles:Array<Obstacle>;
 	private var player:Player;
 	private var lvlNumber:Int;
 	
@@ -28,6 +32,7 @@ class GameWorld extends World
 		
 		this.player = new Player();
 		this.gravityReversers = new Array<Wall>();
+		this.obstacles = new Array<Obstacle>();
 		
 		this.loadLevel();
 		
@@ -35,6 +40,11 @@ class GameWorld extends World
 	
 	public function loadLevel(lvlNumber:Int = 0):Void 
 	{
+		removeAll();
+		gravityReversers = new Array<Wall>();
+		obstacles = new Array<Obstacle>();
+		
+		
 		this.lvlNumber = lvlNumber;
 		var lvlName:String = "map/level_" + lvlNumber + ".tmx";
 		
@@ -50,6 +60,8 @@ class GameWorld extends World
 		add(door);
 		
 		placePlayer();
+		if (player.getCurrentGravity() != Gravity.DOWN)
+			player.reverseGravity();
 		add(player);
 		
 		placeGravityReversers("Wall");
@@ -60,18 +72,23 @@ class GameWorld extends World
 	
 	public function loadNextLevel():Void 
 	{
-		removeAll();
-		gravityReversers = new Array<Wall>();
-		
 		loadLevel(++lvlNumber);
-		
 	}
 	
 	override public function update():Dynamic 
 	{
 		super.update();
-		
+		checkAlive();
 		checkLevelComplete();
+	}
+	
+	private function checkAlive():Void 
+	{
+		if (!player.alive)
+		{
+			loadLevel(lvlNumber);
+			player.alive = true;
+		}
 	}
 	
 	private function checkLevelComplete():Void 
@@ -127,6 +144,12 @@ class GameWorld extends World
 				{
 					var temp:Wall = new Wall(j * Main.kTileSize, i * Main.kTileSize, tileset.getPropertiesByGid(gid).resolve("Gravity"));
 					gravityReversers.push(temp);
+					add(temp);
+				}
+				else if (tileset != null && tileset.getPropertiesByGid(gid).resolve("Obstacle") == "spikes")
+				{
+					var temp:Spikes = new Spikes(j * Main.kTileSize, i * Main.kTileSize);
+					obstacles.push(temp);
 					add(temp);
 				}
 			}

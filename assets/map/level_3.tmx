@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="../gfx/tiles.png" width="192" height="64"/>
+  <terraintypes>
+   <terrain name="Neues Terrain erzeugen" tile="-1"/>
+  </terraintypes>
+  <tile id="1">
+   <properties>
+    <property name="Gravity" value="None"/>
+   </properties>
+  </tile>
+  <tile id="2" terrain="0,,,0">
+   <properties>
+    <property name="Gravity" value="None"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="Gravity" value="up"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="Gravity" value="down"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="Obstacle" value="spikes"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Wall" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYmBgYKIyphYYNW/UvFHzSDePXHsImceOhnGJo+ujJgYAW28AyQ==
+  </data>
+ </layer>
+ <layer name="Door" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALqAjYamQsABsAABw==
+  </data>
+ </layer>
+ <layer name="Solid" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYKQyphYYNW/UvFHzSDePXHtINY+QPdQuV0AYAKOQAEk=
+  </data>
+ </layer>
+ <objectgroup name="Objects" width="20" height="15">
+  <object name="PlayerStart" type="Start" x="64" y="416"/>
+ </objectgroup>
+</map>

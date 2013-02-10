@@ -23,6 +23,8 @@ class Player extends Entity
         private var gravity:Float = 0.5;
 		private var keyDown:Bool = false;
 		private var currentGravity:Gravity;
+		
+		public var alive:Bool = true;
 
 	public function new() 
 	{
@@ -31,6 +33,7 @@ class Player extends Entity
 		
 		this.graphic = new Image("gfx/player.png");
 		this.setHitboxTo(this.graphic);
+		this.type = "player";
 	}
 	
 	override public function update():Void 
@@ -145,10 +148,9 @@ class Player extends Entity
 		
 	}
 	
-	private function reverseGravity():Void 
+	public function reverseGravity():Void 
 	{
 		gravity = -gravity;
-		//jumpPower = -jumpPower;
 		(this.currentGravity == Gravity.UP)?currentGravity = Gravity.DOWN:currentGravity = Gravity.UP;
 	}
 	
@@ -157,4 +159,14 @@ class Player extends Entity
 		return onGround;
 	}
 	
+	public function getCurrentGravity():Gravity
+	{
+		return this.currentGravity;
+	}
+	
+	public function die():Void 
+	{
+		trace("oh my, I died!");
+		alive = false;
+	}
 }
