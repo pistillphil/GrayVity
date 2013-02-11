@@ -1,10 +1,14 @@
 package player;
 import com.haxepunk.Entity;
+import com.haxepunk.graphics.Emitter;
+import com.haxepunk.graphics.Graphiclist;
 import com.haxepunk.graphics.Image;
+import com.haxepunk.utils.Ease;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
 import com.haxepunk.HXP;
 import enums.Gravity;
+import nme.display.BitmapData;
 
 /**
  * ...
@@ -13,6 +17,7 @@ import enums.Gravity;
 
 class Player extends Entity
 {
+		private var playerImage:Image;
 		private var speed:Float = 0.6;
 		private var onGround:Bool=false;
 		private var jumpPower:Float=20;
@@ -23,17 +28,36 @@ class Player extends Entity
         private var gravity:Float = 0.5;
 		private var keyDown:Bool = false;
 		private var currentGravity:Gravity;
+		private var explosionEmitter:Emitter;
+		private var numParticles:Int = 45;
 		
 		public var alive:Bool = true;
 
 	public function new() 
 	{
 		super();
-		currentGravity = Gravity.DOWN;
+		this.currentGravity = Gravity.DOWN;
 		
-		this.graphic = new Image("gfx/player.png");
-		this.setHitboxTo(this.graphic);
+		this.playerImage = new Image("gfx/player.png");
+		this.setHitboxTo(this.playerImage);
 		this.type = "player";
+		
+		this.explosionEmitter = new Emitter(new BitmapData(4, 4), 4, 4);
+		this.explosionEmitter.relative = false;
+		
+		this.explosionEmitter.newType("explosion", [0]);
+		this.explosionEmitter.setColor("explosion", 0x000000);
+		this.explosionEmitter.setAlpha("explosion", 1, 0);
+		this.explosionEmitter.setMotion("explosion", 0, 160, 3, 360, -130, -1, Ease.quadOut);
+		this.explosionEmitter.setGravity("explosion", 2);
+		
+		this.explosionEmitter.newType("blood", [0]);
+		this.explosionEmitter.setColor("blood", 0xFF0000, 0xFF0000);
+		this.explosionEmitter.setAlpha("blood", 1, 0.5);
+		this.explosionEmitter.setMotion("blood", 0, 160, 3, 360, -130, -1, Ease.quadOut);
+		this.explosionEmitter.setGravity("blood", 2);
+		
+		this.graphic = new Graphiclist([this.playerImage, explosionEmitter]);
 	}
 	
 	override public function update():Void 
@@ -167,6 +191,17 @@ class Player extends Entity
 	public function die():Void 
 	{
 		trace("oh my, I died!");
+		
+		for (i in 0...numParticles)
+		{
+			if(Math.random() <= 0.66)
+				explosionEmitter.emit("explosion", x + playerImage.width / 2, y + playerImage.height / 2);
+			else
+				explosionEmitter.emit("blood", x + playerImage.width / 2, y + playerImage.height / 2);
+		}
+		
+		xSpeed = 0;
+		ySpeed = 0;
 		alive = false;
 	}
 }

@@ -86,7 +86,9 @@ class GameWorld extends World
 	{
 		if (!player.alive)
 		{
-			loadLevel(lvlNumber);
+			if (player.getCurrentGravity() != Gravity.DOWN)
+				player.reverseGravity();
+			placePlayer();
 			player.alive = true;
 		}
 	}
