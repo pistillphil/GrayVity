@@ -17,7 +17,7 @@ import nme.display.BitmapData;
 
 class Player extends Entity
 {
-		private var playerImage:Image;
+		public var playerImage:Image;
 		private var speed:Float = 0.6;
 		private var onGround:Bool=false;
 		private var jumpPower:Float=20;
@@ -29,6 +29,7 @@ class Player extends Entity
 		private var keyDown:Bool = false;
 		private var currentGravity:Gravity;
 		private var explosionEmitter:Emitter;
+		private var levelCompleteEmitter:Emitter;
 		private var numParticles:Int = 45;
 		
 		public var alive:Bool = true;
@@ -55,9 +56,19 @@ class Player extends Entity
 		this.explosionEmitter.setColor("blood", 0xFF0000, 0xFF0000);
 		this.explosionEmitter.setAlpha("blood", 1, 0.5);
 		this.explosionEmitter.setMotion("blood", 0, 160, 3, 360, -130, -1, Ease.quadOut);
-		this.explosionEmitter.setGravity("blood", 2);
+		this.explosionEmitter.setGravity("blood", 1);
 		
-		this.graphic = new Graphiclist([this.playerImage, explosionEmitter]);
+		this.levelCompleteEmitter = new Emitter(new BitmapData(1, 1), 1, 1);
+		this.levelCompleteEmitter.relative = false;
+		
+		this.levelCompleteEmitter.newType("beam", [0]);
+		this.levelCompleteEmitter.setColor("beam", 0x444444, 0xFFFFFF);
+		this.levelCompleteEmitter.setAlpha("beam", 1, 0.75);
+		this.levelCompleteEmitter.setMotion("beam", 45, 200, 3.5, 90, -130, -1);
+		this.levelCompleteEmitter.setGravity("beam", -10);
+		
+		
+		this.graphic = new Graphiclist([this.playerImage, explosionEmitter, levelCompleteEmitter]);
 	}
 	
 	override public function update():Void 
@@ -203,5 +214,19 @@ class Player extends Entity
 		xSpeed = 0;
 		ySpeed = 0;
 		alive = false;
+	}
+	
+	public function beam():Void
+	{
+		playerImage.visible = false;
+		for (i in 0...numParticles*10)
+		{
+			levelCompleteEmitter.emit("beam", x + (Math.random()* playerImage.width), y + (Math.random()*playerImage.height));
+		}
+	}
+	
+	public function getRemainingParticles():Int 
+	{
+		return levelCompleteEmitter.particleCount;
 	}
 }

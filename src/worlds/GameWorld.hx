@@ -24,6 +24,7 @@ class GameWorld extends World
 	private var obstacles:Array<Obstacle>;
 	private var player:Player;
 	private var lvlNumber:Int;
+	private var levelComplete:Bool = false;
 	
 	public function new() 
 	{
@@ -43,6 +44,7 @@ class GameWorld extends World
 		removeAll();
 		gravityReversers = new Array<Wall>();
 		obstacles = new Array<Obstacle>();
+		levelComplete = false;
 		
 		
 		this.lvlNumber = lvlNumber;
@@ -62,6 +64,7 @@ class GameWorld extends World
 		placePlayer();
 		if (player.getCurrentGravity() != Gravity.DOWN)
 			player.reverseGravity();
+		player.playerImage.visible = true;
 		add(player);
 		
 		placeGravityReversers("Wall");
@@ -95,9 +98,17 @@ class GameWorld extends World
 	
 	private function checkLevelComplete():Void 
 	{
-		if (Input.check(Key.UP))
+		if (Input.check(Key.UP) && !levelComplete)
 		{
 			if (player.collide("door", player.x, player.y) != null && player.getOnGround())
+			{
+				player.beam();
+				levelComplete = true;
+			}
+		}
+		else if (levelComplete)
+		{
+			if (player.getRemainingParticles() <= 0)
 			{
 				loadNextLevel();
 			}
