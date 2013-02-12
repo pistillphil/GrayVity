@@ -9,6 +9,7 @@ import obstacle.Spikes;
 import player.Player;
 import wall.Wall;
 import enums.Gravity;
+import enums.Position;
 
 /**
  * ...
@@ -161,9 +162,18 @@ class GameWorld extends World
 				}
 				else if (tileset != null && tileset.getPropertiesByGid(gid).resolve("Obstacle") == "spikes")
 				{
-					var temp:Spikes = new Spikes(j * Main.kTileSize, i * Main.kTileSize);
+					var temp:Spikes = null;
+					if (tileset.getPropertiesByGid(gid).resolve("Position") == "top")
+					{
+						temp = new Spikes(j * Main.kTileSize, i * Main.kTileSize, Position.TOP);
+					}
+					else if (tileset.getPropertiesByGid(gid).resolve("Position") == "bottom")
+					{
+						temp = new Spikes(j * Main.kTileSize, i * Main.kTileSize, Position.BOTTOM);
+					}
 					obstacles.push(temp);
 					add(temp);
+				
 				}
 			}
 		}

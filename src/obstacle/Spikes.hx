@@ -1,5 +1,6 @@
 package obstacle;
 import com.haxepunk.Entity;
+import enums.Position;
 import player.Player;
 
 /**
@@ -10,11 +11,14 @@ import player.Player;
 class Spikes extends Obstacle
 {
 
-	public function new(x:Int,y:Int) 
+	public function new(x:Int,y:Int,pos:Position) 
 	{
 		super(x, y);
 		this.type = "spikes";
-		this.setHitbox(cast(Main.kTileSize,Int) ,cast(Main.kTileSize / 2,Int),0, -cast(Main.kTileSize / 2,Int));
+		if(pos == Position.BOTTOM)
+			this.setHitbox(cast(Main.kTileSize, Int) , cast(Main.kTileSize / 2, Int), 0, -cast(Main.kTileSize / 2, Int));
+		else if (pos == Position.TOP)
+			this.setHitbox(cast(Main.kTileSize, Int) , cast(Main.kTileSize / 2, Int), 0, 0);
 		
 	}
 	

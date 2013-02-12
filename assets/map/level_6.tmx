@@ -34,26 +34,26 @@
   <tile id="7">
    <properties>
     <property name="Obstacle" value="spikes"/>
-    <property name="Posittion" value="top"/>
+    <property name="Position" value="top"/>
    </properties>
   </tile>
  </tileset>
  <layer name="Wall" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYKIyphYYNW/UvFHzSDePXHsImceOhnGJo+ujJgYAW28AyQ==
+   eJxjYmBgYMWCmQhgfGqwAWR5DiyYAYsYseYRC4gxj5VK5iH7ixrmkQMGg3nsaJgS81gY8Ke1weDfoWoecphiizN0MWIwrvIBWzwSiwHTiQGn
   </data>
  </layer>
  <layer name="Door" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjALqAjYamQsABsAABw==
+   eJxjYBgFo2AUDDXANtAOGCAAAAqAAAc=
   </data>
  </layer>
- <layer name="Solid" width="20" height="15">
+ <layer name="Solid" width="20" height="15" visible="0">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYKQyphYYNW/UvFHzSDePXHtINY+QPdQuV0AYAKOQAEk=
+   eJxjZGBgYKQyxgYIyePTMxTNIweMmkecelxxNdDuG8rmkZP+STGTWhgAzgwAUg==
   </data>
  </layer>
  <objectgroup name="Objects" width="20" height="15">
-  <object name="PlayerStart" type="Start" x="64" y="416"/>
+  <object name="PlayerStart" type="Start" x="80" y="63"/>
  </objectgroup>
 </map>
