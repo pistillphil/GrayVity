@@ -4,9 +4,11 @@ import com.haxepunk.tmx.TmxEntity;
 import com.haxepunk.World;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
+import com.haxepunk.HXP;
 import obstacle.Obstacle;
 import obstacle.Spikes;
 import player.Player;
+import timer.Timer;
 import wall.Wall;
 import enums.Gravity;
 import enums.Position;
@@ -19,11 +21,14 @@ import enums.Position;
 class GameWorld extends World
 {
 	
+	private var numLevels:Int = 6;
+	
 	private var map:TmxEntity;
 	private var door:TmxEntity;
 	private var gravityReversers:Array<Wall>;
 	private var obstacles:Array<Obstacle>;
 	private var player:Player;
+	private var timer:Timer;
 	private var lvlNumber:Int;
 	private var levelComplete:Bool = false;
 	
@@ -33,6 +38,7 @@ class GameWorld extends World
 		super();
 		
 		this.player = new Player();
+		this.timer = new Timer(32, 32);
 		this.gravityReversers = new Array<Wall>();
 		this.obstacles = new Array<Obstacle>();
 		
@@ -42,6 +48,12 @@ class GameWorld extends World
 	
 	public function loadLevel(lvlNumber:Int = 0):Void 
 	{
+		if (lvlNumber > numLevels )
+		{
+			HXP.engine.paused = true;
+			return;
+		}
+		
 		removeAll();
 		gravityReversers = new Array<Wall>();
 		obstacles = new Array<Obstacle>();
@@ -52,7 +64,6 @@ class GameWorld extends World
 		var lvlName:String = "map/level_" + lvlNumber + ".tmx";
 		
 		map = new TmxEntity(lvlName);
-		
 		map.loadGraphic("gfx/tiles.png", ["Wall","Door"]);
 		map.loadMask("Solid", "solid");
 		
@@ -70,7 +81,8 @@ class GameWorld extends World
 		
 		placeGravityReversers("Wall");
 		
-
+		add(timer);
+		timer.resumeTimer();
 		
 	}
 	
@@ -105,6 +117,7 @@ class GameWorld extends World
 			{
 				player.beam();
 				levelComplete = true;
+				timer.pauseTimer();
 			}
 		}
 		else if (levelComplete)

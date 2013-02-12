@@ -40,7 +40,7 @@
  </tileset>
  <layer name="Wall" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYMWCmQhgfGqwAWR5DiyYAYsYseYRC4gxj5VK5iH7ixrmkQMGg3nsaJgS81gY8Ke1weDfoWoecphiizN0MWIwrvIBWzwSiwHTiQGn
+   eJxjYmBgYMWCmQhgfOqwAWR5DiwYBpDFiDWPWECMeaxUMg/dX5SaRw4YDOaxo2FKzGNhwJ/WBoN/h6p5yGGKLb7Q45EYjK1sYGHAHo/EYgC8VQGd
   </data>
  </layer>
  <layer name="Door" width="20" height="15">
