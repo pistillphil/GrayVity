@@ -1,4 +1,5 @@
 package player;
+import worlds.GameWorld;
 import com.haxepunk.Entity;
 import com.haxepunk.graphics.Emitter;
 import com.haxepunk.graphics.Graphiclist;
@@ -201,19 +202,22 @@ class Player extends Entity
 	
 	public function die():Void 
 	{
-		trace("oh my, I died!");
-		
-		for (i in 0...numParticles)
+		if (!cast(this.world, GameWorld).getLevelComplete())
 		{
-			if(Math.random() <= 0.66)
-				explosionEmitter.emit("explosion", x + playerImage.width / 2, y + playerImage.height / 2);
-			else
-				explosionEmitter.emit("blood", x + playerImage.width / 2, y + playerImage.height / 2);
+			trace("oh my, I died!");
+			
+			for (i in 0...numParticles)
+			{
+				if(Math.random() <= 0.66)
+					explosionEmitter.emit("explosion", x + playerImage.width / 2, y + playerImage.height / 2);
+				else
+					explosionEmitter.emit("blood", x + playerImage.width / 2, y + playerImage.height / 2);
+			}
+			
+			xSpeed = 0;
+			ySpeed = 0;
+			alive = false;
 		}
-		
-		xSpeed = 0;
-		ySpeed = 0;
-		alive = false;
 	}
 	
 	public function beam():Void

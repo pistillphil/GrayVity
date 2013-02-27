@@ -192,4 +192,9 @@ class GameWorld extends World
 		}
 	}
 	
+	public function getLevelComplete():Bool
+	{
+		return levelComplete;
+	}
+	
 }

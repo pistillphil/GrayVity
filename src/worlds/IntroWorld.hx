@@ -43,7 +43,8 @@ class IntroWorld extends World
 	private function onIntroComplete(_):Void 
 	{
 		startButton = new Text("Press \"C\" to start the game...");
-		startButton.size = 24;
+		startButton.font = Main.font;
+		startButton.size = 32;
 		startButton.alpha = 0;
 		startButton.x = HXP.width / 2 - startButton.width / 2;
 		startButton.y = HXP.height - startButtonY;

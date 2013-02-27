@@ -25,7 +25,11 @@ class Timer extends Entity
 		
 		this.time = 0;
 		this.textFieldTime = new Text("0");
+		this.textFieldTime.font = Main.font;
+		this.textFieldTime.size = 22;
 		this.textFieldSeconds = new Text("Seconds" , 64 , 0);
+		this.textFieldSeconds.font = Main.font;
+		this.textFieldSeconds.size = 22;
 		this.timerActive = true;
 		
 		addGraphic(textFieldTime);

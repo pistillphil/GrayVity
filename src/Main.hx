@@ -12,6 +12,7 @@ class Main extends Engine
 	public static inline var kClearColor:Int = 0x333333;
 	public static inline var kProjectName:String = "HaxePunk";
 	public static inline var kTileSize:Int = 32;
+	public static inline var font:String = "font/aesymatt.ttf";
 
 	public function new()
 	{
