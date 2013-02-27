@@ -68,9 +68,9 @@ class IntroWorld extends World
 		removeTween(continueTween);
 		removeTween(introTween);
 		introTween = new VarTween(startGame);
-		introTween.tween(image, "alpha", 0, 4.5, Ease.expoOut);
+		introTween.tween(image, "alpha", 0, 3.5, Ease.expoOut);
 		continueTween.tween(startButton, "alpha", 0, 4, Ease.expoOut);
-		goTween.tween(goText, "alpha", 1, 5, Ease.quadIn);
+		goTween.tween(goText, "alpha", 1, 2.5, Ease.quadIn);
 		addTween(introTween);
 		addTween(continueTween);
 		addTween(goTween);

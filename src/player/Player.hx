@@ -219,7 +219,7 @@ class Player extends Entity
 	public function beam():Void
 	{
 		playerImage.visible = false;
-		for (i in 0...numParticles*10)
+		for (i in 0...numParticles*7)
 		{
 			levelCompleteEmitter.emit("beam", x + (Math.random()* playerImage.width), y + (Math.random()*playerImage.height));
 		}
