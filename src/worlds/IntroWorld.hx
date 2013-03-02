@@ -59,8 +59,9 @@ class IntroWorld extends World
 	private function onGameStart():Void 
 	{
 		goText = new Text("GO!");
+		goText.font = Main.font;
 		goText.alpha = 0;
-		goText.size = 64;
+		goText.size = 128;
 		goText.x = HXP.width / 2 - goText.width / 2;
 		goText.y = HXP.height / 2 - goText.height / 2;
 		addGraphic(goText);

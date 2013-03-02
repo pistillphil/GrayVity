@@ -30,6 +30,7 @@ class GameWorld extends World
 	private var gravityReversers:Array<Wall>;
 	private var obstacles:Array<Obstacle>;
 	private var powerups:Array<PowerUp>;
+	private var collectedpowerups:Array<PowerUp>;
 	private var player:Player;
 	private var timer:Timer;
 	private var lvlNumber:Int;
@@ -45,6 +46,7 @@ class GameWorld extends World
 		this.gravityReversers = new Array<Wall>();
 		this.obstacles = new Array<Obstacle>();
 		this.powerups = new Array<PowerUp>();
+		this.collectedpowerups = new Array<PowerUp>();
 		
 		this.loadLevel();
 		
@@ -111,8 +113,7 @@ class GameWorld extends World
 			if (player.getCurrentGravity() != Gravity.DOWN)
 				player.reverseGravity();
 			placePlayer();
-			powerups = new Array<PowerUp>();
-			placePowerUps();
+			resetPowerUps();
 			timer.resumeTimer();
 			player.alive = true;
 		}
@@ -231,10 +232,31 @@ class GameWorld extends World
 		return levelComplete;
 	}
 	
+	/*
 	public function removePowerUp(pow:PowerUp):Void 
 	{
 		powerups.remove(pow);
+		collectedpowerups.push(pow);
 		remove(pow);
+	}
+	*/
+	
+	public function resetPowerUps():Void 
+	{
+		for (pow in powerups)
+		{
+			pow.setVisibility(true);
+		}
+		
+		/*
+		for (pow in collectedpowerups)
+		{
+			powerups.push(pow);
+			add(pow);
+			collectedpowerups.remove(pow);
+		}
+		*/
+		
 	}
 	
 }

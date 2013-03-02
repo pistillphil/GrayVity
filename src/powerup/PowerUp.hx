@@ -1,5 +1,6 @@
 package powerup;
 import com.haxepunk.Entity;
+import com.haxepunk.graphics.Image;
 
 /**
  * ...
@@ -8,6 +9,8 @@ import com.haxepunk.Entity;
 
 class PowerUp extends Entity
 {
+	
+	private var image:Image;
 
 	public function new(x:Int,y:Int) 
 	{
@@ -15,6 +18,11 @@ class PowerUp extends Entity
 		
 		this.x = x;
 		this.y = y;
+	}
+	
+	public function setVisibility(visibility:Bool):Void 
+	{
+		image.visible = visibility;
 	}
 	
 }
