@@ -7,7 +7,9 @@ import com.haxepunk.utils.Key;
 import com.haxepunk.HXP;
 import obstacle.Obstacle;
 import obstacle.Spikes;
+import powerup.PowerUp;
 import player.Player;
+import powerup.TimeStopper;
 import timer.Timer;
 import wall.Wall;
 import enums.Gravity;
@@ -27,6 +29,7 @@ class GameWorld extends World
 	private var door:TmxEntity;
 	private var gravityReversers:Array<Wall>;
 	private var obstacles:Array<Obstacle>;
+	private var powerups:Array<PowerUp>;
 	private var player:Player;
 	private var timer:Timer;
 	private var lvlNumber:Int;
@@ -41,6 +44,7 @@ class GameWorld extends World
 		this.timer = new Timer(32, 32);
 		this.gravityReversers = new Array<Wall>();
 		this.obstacles = new Array<Obstacle>();
+		this.powerups = new Array<PowerUp>();
 		
 		this.loadLevel();
 		
@@ -57,6 +61,7 @@ class GameWorld extends World
 		removeAll();
 		gravityReversers = new Array<Wall>();
 		obstacles = new Array<Obstacle>();
+		this.powerups = new Array<PowerUp>();
 		levelComplete = false;
 		
 		
@@ -80,6 +85,7 @@ class GameWorld extends World
 		add(player);
 		
 		placeGravityReversers("Wall");
+		placePowerUps();
 		
 		add(timer);
 		timer.resumeTimer();
@@ -105,6 +111,9 @@ class GameWorld extends World
 			if (player.getCurrentGravity() != Gravity.DOWN)
 				player.reverseGravity();
 			placePlayer();
+			powerups = new Array<PowerUp>();
+			placePowerUps();
+			timer.resumeTimer();
 			player.alive = true;
 		}
 	}
@@ -192,9 +201,40 @@ class GameWorld extends World
 		}
 	}
 	
+	public function placePowerUps():Void 
+	{
+		if (map.map.objectGroups.exists("Objects"))
+		{
+			var group = map.map.getObjectGroup("Objects");			
+			for (i in group.objects)
+			{
+				if (i.type == "PowerUp")
+				{
+					if (i.name == "TimeStopper")
+					{
+						var powerup = new TimeStopper(i.x, i.y, Std.parseFloat(i.custom.resolve("time")));
+						powerups.push(powerup);
+						add(powerup);
+					}
+				}
+			}
+		}
+	}
+	
+	public function pauseTimerFor(frames:Int):Void 
+	{
+		timer.pauseTimerFor(frames);
+	}
+	
 	public function getLevelComplete():Bool
 	{
 		return levelComplete;
+	}
+	
+	public function removePowerUp(pow:PowerUp):Void 
+	{
+		powerups.remove(pow);
+		remove(pow);
 	}
 	
 }

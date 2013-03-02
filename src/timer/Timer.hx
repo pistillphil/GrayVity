@@ -15,6 +15,9 @@ class Timer extends Entity
 	private var textFieldTime:Text;
 	private var textFieldSeconds:Text;
 	private var timerActive:Bool;
+	
+	private var pauseFrames:Int;
+	private var timerPaused:Bool = false;
 
 	public function new(x:Float,y:Float) 
 	{
@@ -46,7 +49,26 @@ class Timer extends Entity
 			textFieldTime.text = (Math.round(time * 100)/100) + "";	//round the time to 2 digits after comma
 		}
 		
+		if (timerPaused && !timerActive)
+		{
+			if (pauseFrames > 0)
+			{
+				pauseFrames--;
+			}
+			else
+			{
+				timerPaused = false;
+				timerActive = true;
+			}
+		}
 		
+	}
+	
+	public function pauseTimerFor(frames:Int):Void 
+	{
+		timerPaused = true;
+		timerActive = false;
+		pauseFrames = frames;
 	}
 	
 	public function pauseTimer():Void 
@@ -57,6 +79,10 @@ class Timer extends Entity
 	public function resumeTimer():Void 
 	{
 		timerActive = true;
+		timerPaused = false;
+		pauseFrames = 0;
 	}
+	
+	
 	
 }

@@ -56,5 +56,10 @@
  </layer>
  <objectgroup name="Objects" width="20" height="15">
   <object name="PlayerStart" type="Start" x="73" y="163"/>
+  <object name="TimeStopper" type="PowerUp" x="288" y="384">
+   <properties>
+    <property name="time" value="3"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
