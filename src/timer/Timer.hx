@@ -71,9 +71,12 @@ class Timer extends Entity
 		pauseFrames = frames;
 	}
 	
+	
 	public function pauseTimer():Void 
 	{
 		timerActive = false;
+		timerPaused = false;
+		pauseFrames = 0;
 	}
 	
 	public function resumeTimer():Void 
