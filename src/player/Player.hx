@@ -21,7 +21,7 @@ class Player extends Entity
 		public var playerImage:Image;
 		private var speed:Float = 0.6;
 		private var onGround:Bool=false;
-		private var jumpPower:Float=20;
+		private var jumpPower:Float=16;
 		private var hFriction:Float=0.9;
 		private var vFriction:Float=0.95;
 		private var xSpeed:Float=0;

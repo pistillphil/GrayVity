@@ -23,7 +23,7 @@ import enums.Position;
 class GameWorld extends World
 {
 	
-	private var numLevels:Int = 6;
+	private var numLevels:Int = 9;
 	
 	private var map:TmxEntity;
 	private var door:TmxEntity;
@@ -52,7 +52,7 @@ class GameWorld extends World
 		
 	}
 	
-	public function loadLevel(lvlNumber:Int = 0):Void 
+	public function loadLevel(lvlNumber:Int = 7):Void 
 	{
 		if (lvlNumber > numLevels )
 		{

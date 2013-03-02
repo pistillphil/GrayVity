@@ -26,10 +26,16 @@
     <property name="Gravity" value="down"/>
    </properties>
   </tile>
+  <tile id="6">
+   <properties>
+    <property name="Obstacle" value="spikes"/>
+    <property name="Position" value="bottom"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Wall" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYCIDs2LBMDlqgVHzyDODmuahmz3Q5uFTT2/zsMnTwjxcenDJoefVgTaPEsyCxgcAq88Awg==
+   eJxjYmBgYCIDs2LBMDlqgVHzyDODmuahmz3Q5uFTT2/zsMnTwjxcenDJoedVapvHjoSJMY8SzILGBwC1pwDX
   </data>
  </layer>
  <layer name="Door" width="20" height="15">
