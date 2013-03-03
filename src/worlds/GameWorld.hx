@@ -92,6 +92,11 @@ class GameWorld extends World
 		add(timer);
 		timer.resumeTimer();
 		
+		if (lvlNumber == numLevels)
+		{
+			timer.pauseTimer();
+		}
+		
 	}
 	
 	public function loadNextLevel():Void 

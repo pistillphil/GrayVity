@@ -41,7 +41,7 @@
  </tileset>
  <layer name="Wall" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYKIyphYYNW/UvFHzhr551MQAOycAhQ==
+   eJxjYmBgYKUSZoJiaoFR80bNGzVv6JvHQiUMMgsANjoA3w==
   </data>
  </layer>
  <layer name="Door" width="20" height="15">
@@ -55,11 +55,6 @@
   </data>
  </layer>
  <objectgroup name="Objects" width="20" height="15">
-  <object name="PlayerStart" type="Start" x="224" y="239"/>
-  <object name="TimeStopper" type="PowerUp" x="297" y="239">
-   <properties>
-    <property name="time" value="3"/>
-   </properties>
-  </object>
+  <object name="PlayerStart" type="Start" x="318" y="249"/>
  </objectgroup>
 </map>

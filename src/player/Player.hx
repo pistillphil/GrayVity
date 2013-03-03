@@ -33,7 +33,7 @@ class Player extends Entity
 		private var levelCompleteEmitter:Emitter;
 		private var numParticles:Int = 45;
 
-		private var sloMoSkip:Int = 2;	//every n-th frame will be skipped if slowMo
+		private var sloMoSkip:Int = 3;	//every n-th frame will be skipped if slowMo
 		private var sloMoSkipLeft:Int = 1;
 		private var skip:Bool = false;
 		
