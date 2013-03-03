@@ -52,7 +52,7 @@ class GameWorld extends World
 		
 	}
 	
-	public function loadLevel(lvlNumber:Int = 7):Void 
+	public function loadLevel(lvlNumber:Int = 0):Void 
 	{
 		if (lvlNumber > numLevels )
 		{

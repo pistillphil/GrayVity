@@ -32,6 +32,10 @@ class Player extends Entity
 		private var explosionEmitter:Emitter;
 		private var levelCompleteEmitter:Emitter;
 		private var numParticles:Int = 45;
+
+		private var sloMoSkip:Int = 2;	//every n-th frame will be skipped if slowMo
+		private var sloMoSkipLeft:Int = 1;
+		private var skip:Bool = false;
 		
 		public var alive:Bool = true;
 
@@ -80,22 +84,34 @@ class Player extends Entity
 		
 		checkInput();
 		checkGravityReverse();
-		
-		xSpeed*=hFriction;
-		ySpeed*=vFriction;
-		moveX();
-		moveY();
+			
+		if (!skip)
+		{
+			xSpeed*=hFriction;
+			ySpeed*=vFriction;
+			moveX();
+			moveY();
+		}
+		else 
+		{
+			skip = false;
+		}
 		
 	}
 	
 	private function checkInput():Void 
 	{
-		if (Input.check(Key.LEFT))
+		if (Input.check(Key.X))
+		{
+			checkSkip();
+		}
+		
+		if (Input.check(Key.LEFT) && !skip)
 		{
 			xSpeed -= speed;
 			keyDown = true;
 		}
-		if (Input.check(Key.RIGHT))
+		if (Input.check(Key.RIGHT) && !skip)
 		{
 			xSpeed += speed;
 			keyDown = true;
@@ -118,7 +134,7 @@ class Player extends Entity
 				ySpeed = jumpPower;
 			}
 		}
-		else 
+		else if(!skip)
 		{
 			ySpeed += gravity;
 		}
@@ -232,5 +248,20 @@ class Player extends Entity
 	public function getRemainingParticles():Int 
 	{
 		return levelCompleteEmitter.particleCount;
+	}
+	
+	private function checkSkip():Void 
+	{
+		if (sloMoSkipLeft >= sloMoSkip)
+		{
+			skip = true;
+			sloMoSkipLeft = 1;
+		}
+		
+		else 
+		{
+			skip = false;
+			sloMoSkipLeft++;
+		}
 	}
 }
