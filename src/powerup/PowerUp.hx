@@ -1,6 +1,7 @@
 package powerup;
 import com.haxepunk.Entity;
 import com.haxepunk.graphics.Image;
+import com.haxepunk.Sfx;
 
 /**
  * ...
@@ -11,6 +12,7 @@ class PowerUp extends Entity
 {
 	
 	private var image:Image;
+	private var pickUpSound:Sfx;
 
 	public function new(x:Int,y:Int) 
 	{

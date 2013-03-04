@@ -1,6 +1,7 @@
 package powerup;
 import com.haxepunk.graphics.Emitter;
 import com.haxepunk.graphics.Image;
+import com.haxepunk.Sfx;
 import nme.display.BitmapData;
 import worlds.GameWorld;
 
@@ -34,6 +35,8 @@ class TimeStopper extends PowerUp
 		this.setHitboxTo(this.image);
 		addGraphic(this.image);
 		addGraphic(this.emitter);
+		
+		pickUpSound = new Sfx("sfx/coin.wav");
 	}
 	
 	override public function update():Void 
@@ -44,6 +47,7 @@ class TimeStopper extends PowerUp
 		if (collide("player", x, y) != null && image.visible)
 		{
 			sparkle();
+			pickUpSound.play();
 			
 			var world:GameWorld = cast(this.world, GameWorld);
 			//world.removePowerUp(this);

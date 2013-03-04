@@ -1,4 +1,5 @@
 package player;
+import com.haxepunk.Sfx;
 import worlds.GameWorld;
 import com.haxepunk.Entity;
 import com.haxepunk.graphics.Emitter;
@@ -19,6 +20,10 @@ import nme.display.BitmapData;
 class Player extends Entity
 {
 		public var playerImage:Image;
+		private var dieSound:Sfx;
+		private var teleportSound:Sfx;
+		private var jumpSound:Sfx;
+		private var reverseSound:Sfx;
 		private var speed:Float = 0.6;
 		private var onGround:Bool=false;
 		private var jumpPower:Float=16;
@@ -74,6 +79,11 @@ class Player extends Entity
 		
 		
 		this.graphic = new Graphiclist([this.playerImage, explosionEmitter, levelCompleteEmitter]);
+		
+		dieSound = new Sfx("sfx/die.wav");
+		teleportSound = new Sfx("sfx/teleport.wav");
+		jumpSound = new Sfx("sfx/jump.wav");
+		reverseSound = new Sfx("sfx/gravityreverse.wav");
 	}
 	
 	override public function update():Void 
@@ -120,18 +130,20 @@ class Player extends Entity
 		{
 			onGround = true;
 			ySpeed = 0;
-			if (Input.check(Key.C))
+			if (Input.check(Key.C) && playerImage.visible)
 			{
 				ySpeed = -jumpPower;
+				jumpSound.play();
 			}
 		}
 		else if (collide("solid", x, y - 1) != null && currentGravity == Gravity.UP)
 		{
 			onGround = true;
 			ySpeed = 0;
-			if (Input.check (Key.C))
+			if (Input.check (Key.C) && playerImage.visible)
 			{
 				ySpeed = jumpPower;
+				jumpSound.play();
 			}
 		}
 		else if(!skip)
@@ -186,12 +198,14 @@ class Player extends Entity
 				if (collide("up", x, y + 1) != null)
 				{
 					reverseGravity();
+					reverseSound.play();
 				}
 				
 			case Gravity.UP:
 				if (collide("down", x, y - 1) != null)
 				{
 					reverseGravity();
+					reverseSound.play();
 				}
 				
 			//default:
@@ -221,6 +235,7 @@ class Player extends Entity
 		if (!cast(this.world, GameWorld).getLevelComplete())
 		{
 			trace("oh my, I died!");
+			dieSound.play();
 			
 			for (i in 0...numParticles)
 			{
@@ -239,6 +254,7 @@ class Player extends Entity
 	public function beam():Void
 	{
 		playerImage.visible = false;
+		teleportSound.play();
 		for (i in 0...numParticles*7)
 		{
 			levelCompleteEmitter.emit("beam", x + (Math.random()* playerImage.width), y + (Math.random()*playerImage.height));
