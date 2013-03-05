@@ -61,5 +61,13 @@
     <property name="time" value="1"/>
    </properties>
   </object>
+  <object name="TimeAdder" type="PowerUp" x="332" y="58">
+   <properties>
+    <property name="duration" value="3"/>
+    <property name="points" value="0,0,125,0"/>
+    <property name="time" value="0.5"/>
+   </properties>
+   <polyline points="0,0 125,0"/>
+  </object>
  </objectgroup>
 </map>

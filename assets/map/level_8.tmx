@@ -49,7 +49,7 @@
    eJxjYBgFo2BwAbaBdsAoGLQAABFYAAc=
   </data>
  </layer>
- <layer name="Solid" width="20" height="15">
+ <layer name="Solid" width="20" height="15" visible="0">
   <data encoding="base64" compression="zlib">
    eJxjZGBgYKQyxgbQ5bDxCekhxTxi9FAKiPE3OeZRC9DDPErCYCj6d9Q84u2kdrkCwgDVtABT
   </data>
@@ -60,6 +60,14 @@
    <properties>
     <property name="time" value="1.5"/>
    </properties>
+  </object>
+  <object name="TimeAdder" type="PowerUp" x="530" y="305">
+   <properties>
+    <property name="duration" value="5"/>
+    <property name="points" value="0,0,-1,54,-484,54"/>
+    <property name="time" value="1"/>
+   </properties>
+   <polyline points="0,0 -1,54 -484,54"/>
   </object>
  </objectgroup>
 </map>

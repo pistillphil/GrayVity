@@ -86,6 +86,9 @@ class Timer extends Entity
 		pauseFrames = 0;
 	}
 	
-	
+	public function addTime(time:Float):Void 
+	{
+		this.time += time;
+	}
 	
 }

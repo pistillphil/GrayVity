@@ -9,6 +9,7 @@ import obstacle.Obstacle;
 import obstacle.Spikes;
 import powerup.PowerUp;
 import player.Player;
+import powerup.TimeAdder;
 import powerup.TimeStopper;
 import timer.Timer;
 import wall.Wall;
@@ -121,6 +122,13 @@ class GameWorld extends World
 			resetPowerUps();
 			timer.resumeTimer();
 			player.alive = true;
+			for (i in powerups)
+			{
+				if (Std.is(i,TimeAdder))
+				{
+					cast(i, TimeAdder).resetPath();
+				}
+			}
 		}
 	}
 	
@@ -222,6 +230,21 @@ class GameWorld extends World
 						powerups.push(powerup);
 						add(powerup);
 					}
+					else if(i.name == "TimeAdder") 
+					{
+						var pointsString:String = i.custom.resolve("points");
+						var pointsStrings:Array<String> = pointsString.split(",");
+						var pointsFloat:Array<Float> = new Array<Float>();
+						
+						for ( i in 0...pointsStrings.length)
+						{
+							pointsFloat[i] = Std.parseFloat(pointsStrings[i]);
+						}
+						
+						var powerup = new TimeAdder(i.x, i.y, Std.parseFloat(i.custom.resolve("time")), pointsFloat,Std.parseFloat(i.custom.resolve("duration")));
+						powerups.push(powerup);
+						add(powerup);
+					}
 				}
 			}
 		}
@@ -262,6 +285,11 @@ class GameWorld extends World
 		}
 		*/
 		
+	}
+	
+	public function addTime(time:Float):Void 
+	{
+		timer.addTime(time);
 	}
 	
 }
