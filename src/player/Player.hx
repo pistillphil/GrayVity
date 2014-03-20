@@ -5,6 +5,7 @@ import com.haxepunk.Entity;
 import com.haxepunk.graphics.Emitter;
 import com.haxepunk.graphics.Graphiclist;
 import com.haxepunk.graphics.Image;
+import com.haxepunk.graphics.Spritemap;
 import com.haxepunk.utils.Ease;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
@@ -18,7 +19,7 @@ import enums.Gravity;
 
 class Player extends Entity
 {
-		public var playerImage:Image;
+		public var playerImage:Spritemap;
 		private var dieSound:Sfx;
 		private var teleportSound:Sfx;
 		private var jumpSound:Sfx;
@@ -48,7 +49,17 @@ class Player extends Entity
 		super();
 		this.currentGravity = Gravity.DOWN;
 		
-		this.playerImage = new Image("gfx/player.png");
+		//this.playerImage = new Image("gfx/player.png");
+		
+		this.playerImage = new Spritemap("gfx/playersprites.png", 16, 32);
+		this.playerImage.add("idledown", [4]);
+		this.playerImage.add("idleup", [5]);
+		this.playerImage.add("gravdown", [0, 1], 6, true);
+		this.playerImage.add("gravup", [2, 3], 6, true);
+		
+		this.playerImage.play("idledown");
+		
+		
 		this.setHitboxTo(this.playerImage);
 		this.type = "player";
 		
@@ -67,7 +78,7 @@ class Player extends Entity
 		this.explosionEmitter.setMotion("blood", 0, 160, 3, 360, -130, -1, Ease.quadOut);
 		this.explosionEmitter.setGravity("blood", 1);
 		
-		this.levelCompleteEmitter = new Emitter("gfx/emmit.png", 1, 1);
+		this.levelCompleteEmitter = new Emitter("gfx/emmit.png", 1, 3);
 		this.levelCompleteEmitter.relative = false;
 		
 		this.levelCompleteEmitter.newType("beam", [0]);
@@ -87,6 +98,7 @@ class Player extends Entity
 	
 	override public function update():Void 
 	{
+		super.update();
 		keyDown = false;
 		onGround = false;
 		super.update();
@@ -104,6 +116,22 @@ class Player extends Entity
 		else 
 		{
 			skip = false;
+		}
+		if(keyDown && currentGravity == Gravity.DOWN)
+		{
+			playerImage.play("gravdown");
+		}
+		else if(keyDown && currentGravity == Gravity.UP)
+		{
+			playerImage.play("gravup");
+		}
+		else if(!keyDown && currentGravity == Gravity.DOWN)
+		{
+			playerImage.play("idledown");
+		}
+		else if(!keyDown && currentGravity == Gravity.UP)
+		{
+			playerImage.play("idleup");
 		}
 		
 	}
@@ -233,7 +261,7 @@ class Player extends Entity
 	{
 		if (!cast(this.world, GameWorld).getLevelComplete())
 		{
-			trace("oh my, I died!");
+			//trace("oh my, I died!");
 			dieSound.play();
 			
 			for (i in 0...numParticles)
