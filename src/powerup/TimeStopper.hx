@@ -2,7 +2,6 @@ package powerup;
 import com.haxepunk.graphics.Emitter;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.Sfx;
-import nme.display.BitmapData;
 import worlds.GameWorld;
 
 /**
@@ -24,7 +23,7 @@ class TimeStopper extends PowerUp
 		this.time = Math.round(time * Main.kFrameRate);
 		
 		
-		this.emitter = new Emitter(new BitmapData(3, 3), 3, 3);
+		this.emitter = new Emitter("gfx/emmit.png", 3, 3);
 		this.emitter.relative = false;
 		this.emitter.newType("sparkle", [0]);
 		this.emitter.setColor("sparkle", 0xFFFF00);

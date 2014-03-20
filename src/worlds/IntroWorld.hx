@@ -84,7 +84,7 @@ class IntroWorld extends World
 		HXP.world = new GameWorld();
 	}
 	
-	override public function update():Dynamic 
+	override public function update():Void 
 	{
 		super.update();
 		

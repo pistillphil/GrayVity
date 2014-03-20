@@ -10,7 +10,6 @@ import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
 import com.haxepunk.HXP;
 import enums.Gravity;
-import nme.display.BitmapData;
 
 /**
  * ...
@@ -53,7 +52,7 @@ class Player extends Entity
 		this.setHitboxTo(this.playerImage);
 		this.type = "player";
 		
-		this.explosionEmitter = new Emitter(new BitmapData(4, 4), 4, 4);
+		this.explosionEmitter = new Emitter("gfx/emmit.png", 4, 4);
 		this.explosionEmitter.relative = false;
 		
 		this.explosionEmitter.newType("explosion", [0]);
@@ -68,7 +67,7 @@ class Player extends Entity
 		this.explosionEmitter.setMotion("blood", 0, 160, 3, 360, -130, -1, Ease.quadOut);
 		this.explosionEmitter.setGravity("blood", 1);
 		
-		this.levelCompleteEmitter = new Emitter(new BitmapData(1, 1), 1, 1);
+		this.levelCompleteEmitter = new Emitter("gfx/emmit.png", 1, 1);
 		this.levelCompleteEmitter.relative = false;
 		
 		this.levelCompleteEmitter.newType("beam", [0]);

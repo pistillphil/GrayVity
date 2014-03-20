@@ -105,7 +105,7 @@ class GameWorld extends World
 		loadLevel(++lvlNumber);
 	}
 	
-	override public function update():Dynamic 
+	override public function update():Void
 	{
 		super.update();
 		checkAlive();
