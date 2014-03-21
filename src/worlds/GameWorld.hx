@@ -2,6 +2,7 @@ package worlds;
 import com.haxepunk.Entity;
 import com.haxepunk.tmx.TmxEntity;
 import com.haxepunk.World;
+import com.haxepunk.graphics.Text;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
 import com.haxepunk.HXP;
@@ -53,11 +54,11 @@ class GameWorld extends World
 		
 	}
 	
-	public function loadLevel(lvlNumber:Int = 0):Void 
+	public function loadLevel(lvlNumber:Int=0):Void 
 	{
 		if (lvlNumber > numLevels )
 		{
-			HXP.engine.paused = true;
+			HXP.world = new GameWorld();
 			return;
 		}
 		
@@ -96,6 +97,20 @@ class GameWorld extends World
 		if (lvlNumber == numLevels)
 		{
 			timer.pauseTimer();
+			var restart:Text = new Text("Restart?");
+			restart.font = Main.font;
+			restart.size = 40;
+			restart.x = (Main.kScreenWidth / 2) - (restart.textWidth / 2);
+			restart.y = 45;
+			
+			var useDoors:Text = new Text("Use the doors!");
+			useDoors.font = Main.font;
+			useDoors.size = 40;
+			useDoors.x = (Main.kScreenWidth / 2) - (useDoors.textWidth / 2);
+			useDoors.y = 85;
+			
+			addGraphic(restart);
+			addGraphic(useDoors);
 		}
 		
 	}

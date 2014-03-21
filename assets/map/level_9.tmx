@@ -41,20 +41,20 @@
  </tileset>
  <layer name="Wall" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYKUSZoJiaoFR80bNGzVv6JvHQiUMMgsANjoA3w==
+   eJxjYmBgYKUSZoJiaoFR84ameYNdHbFg1DzqmMdCJQwyCwBHygDn
   </data>
  </layer>
  <layer name="Door" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIKhAQAEsAAB
+   eJxjYBgFIx2wQfFIASPNv8MJAAA5YAAZ
   </data>
  </layer>
  <layer name="Solid" width="20" height="15" visible="0">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYKQyphYYNW/UvFHzhr551MQAn+QAQw==
+   eJxjZGBgYKQyphYYNW9omjfY1RELRs2jjnnUxACorABH
   </data>
  </layer>
  <objectgroup name="Objects" width="20" height="15">
-  <object name="PlayerStart" type="Start" x="318" y="249"/>
+  <object name="PlayerStart" type="Start" x="87" y="84"/>
  </objectgroup>
 </map>
