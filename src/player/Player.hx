@@ -23,7 +23,7 @@ class Player extends Entity
 		private var dieSound:Sfx;
 		private var teleportSound:Sfx;
 		private var jumpSound:Sfx;
-		private var reverseSound:Sfx;
+		public var reverseSound:Sfx;
 		private var speed:Float = 0.6;
 		private var onGround:Bool=false;
 		private var jumpPower:Float=16;

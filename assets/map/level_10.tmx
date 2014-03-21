@@ -41,30 +41,20 @@
  </tileset>
  <layer name="Wall" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYKIyJhVwYMEMFJgHA+h6KTUPm/mj5o2aN2oefvOoiQHobwCv
+   eJxjYmBgYKUSZoJiaoFR84ameYNdHbFg1DzqmMdCJQwyCwBHygDn
   </data>
  </layer>
  <layer name="Door" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFxAK2gXbAKBgFIxwAABnIAAc=
+   eJxjYBgFIx2wQfFIASPNv8MJAAA5YAAZ
   </data>
  </layer>
  <layer name="Solid" width="20" height="15" visible="0">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYKQyphag1Dx0vYPNfaPmjZo3EsyjJgYAo7gARA==
+   eJxjZGBgYKQyphYYNW9omjfY1RELRs2jjnnUxACorABH
   </data>
  </layer>
  <objectgroup name="Objects" width="20" height="15">
-  <object name="PlayerStart" type="Start" x="224" y="239"/>
-  <object name="TimeStopper" type="PowerUp" x="379" y="237">
-   <properties>
-    <property name="time" value="3"/>
-   </properties>
-  </object>
-  <object type="PeriodicalGravityReverse" x="0" y="0">
-   <properties>
-    <property name="interval" value="2"/>
-   </properties>
-  </object>
+  <object name="PlayerStart" type="Start" x="87" y="84"/>
  </objectgroup>
 </map>

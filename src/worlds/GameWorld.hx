@@ -25,7 +25,7 @@ import enums.Position;
 class GameWorld extends World
 {
 	
-	private var numLevels:Int = 9;
+	private var numLevels:Int = 10;
 	
 	private var map:TmxEntity;
 	private var door:TmxEntity;
@@ -37,6 +37,9 @@ class GameWorld extends World
 	private var timer:Timer;
 	private var lvlNumber:Int;
 	private var levelComplete:Bool = false;
+	
+	private var gravityReverseInterval:Float = 0;
+	private var gravityReverseTimer:Float = 0;
 	
 	public function new() 
 	{
@@ -63,6 +66,8 @@ class GameWorld extends World
 		}
 		
 		removeAll();
+		gravityReverseInterval = 0;
+		gravityReverseTimer = 0;
 		gravityReversers = new Array<Wall>();
 		obstacles = new Array<Obstacle>();
 		this.powerups = new Array<PowerUp>();
@@ -123,6 +128,7 @@ class GameWorld extends World
 	override public function update():Void
 	{
 		super.update();
+		checkGravityReverse();
 		checkAlive();
 		checkLevelComplete();
 	}
@@ -133,6 +139,7 @@ class GameWorld extends World
 		{
 			if (player.getCurrentGravity() != Gravity.DOWN)
 				player.reverseGravity();
+			gravityReverseTimer = 0;
 			placePlayer();
 			resetPowerUps();
 			timer.resumeTimer();
@@ -261,6 +268,10 @@ class GameWorld extends World
 						add(powerup);
 					}
 				}
+				else if(i.type == "PeriodicalGravityReverse")
+				{
+					gravityReverseInterval = Std.parseFloat(i.custom.resolve("interval"));
+				}
 			}
 		}
 	}
@@ -305,6 +316,20 @@ class GameWorld extends World
 	public function addTime(time:Float):Void 
 	{
 		timer.addTime(time);
+	}
+	
+	private function checkGravityReverse()
+	{
+		if(gravityReverseInterval > 0)
+		{
+			gravityReverseTimer += HXP.elapsed;
+			if (gravityReverseTimer > gravityReverseInterval)
+			{
+				player.reverseGravity();
+				player.reverseSound.play();
+				gravityReverseTimer = 0;
+			}
+		}
 	}
 	
 }
